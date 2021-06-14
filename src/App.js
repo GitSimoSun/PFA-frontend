@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Home from './Home/Home';
+import Tools from './Tool/Tools';
+import Companies from './Company/Companies';
+import MatchingCompanies from './MatchingCompanies/MatchingCompanies';
+import {BrowserRouter as Router, Route} from 'react-router-dom';
+import { MainProvider } from './Main/Context/MainContext';
+import '../src/Main/Styles/Main.css'
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  	return (
+		<MainProvider>
+			<Router>
+				<Route path="/" exact component={Home} />
+				<Route path="/tools" component={Tools} />
+				<Route path="/companies" component={Companies} />
+				<Route path="/matching-companies" component={MatchingCompanies} />
+			</Router>
+		</MainProvider>
+  	);
 }
 
 export default App;
