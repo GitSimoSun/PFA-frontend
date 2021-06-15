@@ -15,8 +15,6 @@ const colors = ["#135100", "#ED561B", "#DDDF00", "#006D7E", "#1B9C29", "#D07035"
 
 export default function Graph({data, plus10k}) {
     const max = Math.max(...data.map(d => d.stacks))
-    console.log(max)
-    console.log(plus10k)
     return(
         <div className="graph">
             <ResponsiveContainer width="100%" height={400}>

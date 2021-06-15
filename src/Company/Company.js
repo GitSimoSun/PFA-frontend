@@ -1,22 +1,32 @@
-import React from 'react';
-import Icon from '../Icons/pinterest.png'
-import Python from '../Icons/python.png'
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
+import getToolByName from "../Functions/getToolByName";
 
-export default function Company(props) {
+
+export default function Company({data}) {
+    let history = useHistory();
+    const [popTools, setPopTools] = useState([]);
+
+    useEffect(() => {
+            if (data["top_tools"]){
+                const arr = JSON.parse(data["top_tools"].replaceAll("'", '"'))
+                arr.map(t => getToolByName(t, setPopTools))
+            }
+    }, [data])
 
 	return (
 		<div className="company">
-            <div onClick={props.onClick}>          
-                <img src={Icon} alt="company icon"/>
-                <p className="company-name">Pinterest</p>
+            <div onClick={() => history.push("/companies/" + data.name)}>          
+                <img src={data.logo} alt="company icon"/>
+                <p className="company-name">{data.name}</p>
                 <div className="company-description">
-                    <p>Pinterest is a social bookmarking site where users collect and share photos of their favorite events ...</p>
+                    <p>{data.description}</p>
                 </div>
             </div>
             <div className="popular-tools">
                 <p>POPULAR TOOLS IN STACK</p>
                 <div className="popular-tools-tools">
-                    {Array(5).fill(0).map(i => <img src={Python} alt="tool-icon" />)}
+                    {popTools.map(i => <img src={i.logo} alt="tool-icon" />)}
                 </div>
             </div>
 		</div>

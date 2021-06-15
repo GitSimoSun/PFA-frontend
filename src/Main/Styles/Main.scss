@@ -155,16 +155,29 @@ $grey-color: #949494;
       stroke-opacity: 0;
 }
 .items {
-    display: flex;
-    justify-content: space-around;
-    margin: 25px 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 100px;
+    grid-row-gap: 50px;
+    margin: 25px 20px;
 }
 .tool {
     text-align: center;
     border: 1px solid $grey-color;
     border-radius: 8px;
-    div:first-child {
-        padding: 22px 35px;
+    .remove_tool {
+        float: right;
+        margin-right: 10px;
+        font-size: 24px;
+        color: black;
+        cursor: pointer;
+        &:hover{
+            filter: brightness(1.2);
+            color: grey;
+        }
+    }
+    .tool_name_icon {
+        padding: 22px 35px 0px 35px;
         .tool-name {
             font-weight: 600;
             font-size: 20px;
@@ -175,15 +188,22 @@ $grey-color: #949494;
             padding: 27px 5px;
         }
     }
-    .type {
-        border: 1px solid $grey-color;
-        border-radius: 20px;
-        color: $grey-color;
-        padding: 6px;
-        p {
-            font-size: 16px;
-        }
+    .type-container {
+        min-height: 80px; 
+        .type {
+            border: 1px solid $grey-color;
+            width: 80%;
+            border-radius: 20px;
+            color: $grey-color;
+            padding: 6px 0px;
+            p {
+                font-size: 16px;
+            }
+            margin: 0 auto;
+            margin-bottom: 30px;
+        }   
     }
+    
     .stack-num {
         border-top: 1px solid $grey-color;
         padding: 12px 0;
@@ -264,6 +284,7 @@ $grey-color: #949494;
             }
             .company-description {
                 color: $grey-color;
+                min-height: 90px;
                 padding: 4px 6px;
                 p {
                     font-size: 16px;
@@ -279,8 +300,10 @@ $grey-color: #949494;
                     text-align: left;
                 }
                 .popular-tools-tools {
+                    margin: 10px 0;
                     img {
-                        max-width: 69px; 
+                        max-width: 50px;
+                        margin: 0 3px;
                     }
                 }
             }
@@ -303,7 +326,7 @@ $grey-color: #949494;
             padding: 8px;
             img {
                 max-width: 140px;
-                margin-right: 10px;
+                margin-right: 20px;
             }
             .company-name {
                 font-size: 24px;
@@ -528,7 +551,7 @@ $grey-color: #949494;
             }
             .company-description {
                 color: $grey-color;
-                // text-align: left;
+                min-height: 90px;
                 padding: 4px 6px;
                 p {
                     font-size: 16px;
@@ -544,8 +567,10 @@ $grey-color: #949494;
                     text-align: left;
                 }
                 .popular-tools-tools {
+                    margin: 10px 0;
                     img {
-                        max-width: 69px; 
+                        max-width: 50px;
+                        margin: 0 3px;
                     }
                 }
             }

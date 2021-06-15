@@ -16,6 +16,11 @@ export default function Libraries({c, clink}) {
             .then(res => res.json())
             .then(res => setData([...res]))
             .catch(console.log());
+        }
+    , [c])
+	
+	useEffect(
+		() => {
 			let t = data.slice(0,10).every(t => t.stacks_num  >= 1000);
 			setPlus10k(t);
 			setGraphData(data.slice(0,10).map(
@@ -25,9 +30,8 @@ export default function Libraries({c, clink}) {
 						}
 				}
 			))
-        }
-    , [data, c])
-
+		}
+	, [data])
 
 
 	return (

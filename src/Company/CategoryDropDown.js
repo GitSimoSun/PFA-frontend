@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import CategoryItem from '../MatchingCompanies/CategoryItem';
-import PythonIcon from '../Icons/python.png'
+import getToolByName from "../Functions/getToolByName";
 
 
 export default function CategoryDropDown(props) {
 	const [clicked, setClicked] = useState(false)
+	const [data, setData] = useState([])
+    useEffect(() => {
+		console.log(props.data);
+		props.data.map(t => {return {name: t, logo: getToolByName(t, setData)}})
+	}, [props.data])
 	const handleClick = () => setClicked(prevState => !prevState)
 	return (
 		<div className="category-dropdown">
@@ -12,7 +17,7 @@ export default function CategoryDropDown(props) {
 				{props.children}
 				<div className="category-name">
 					<span>{props.category}</span>
-					<span className="category-num">({props.num})</span>
+					<span className="category-num">({props.data.length})</span>
 				</div>
 				<div className="category-pm">
 					{clicked? <div className="bar"><div></div></div> : "+"}
@@ -20,7 +25,7 @@ export default function CategoryDropDown(props) {
 			</div>
 			{clicked &&
 			<div className="category-items">
-				{Array(21).fill(0).map(item => <CategoryItem img={PythonIcon} name="Python" />)}
+				{data.map(item => <CategoryItem img={item.logo} name={item.name} />)}
 			</div>}
 		</div>
 	)

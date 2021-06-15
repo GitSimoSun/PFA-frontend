@@ -42,7 +42,7 @@ export default function AllItems({category}) {
                     </div>
                     {show && <div className="show-more" onClick={handleClick}><p>Show More</p></div>}
                 </div>
-                : <div onClick={() => console.log(data)}>loding...</div>
+                : <div>loding...</div>
             }
         </div>
 

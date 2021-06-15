@@ -152,9 +152,11 @@
 }
 
 .items {
-  display: flex;
-  justify-content: space-around;
-  margin: 25px 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 100px;
+  grid-row-gap: 50px;
+  margin: 25px 20px;
 }
 
 .tool {
@@ -162,25 +164,42 @@
   border: 1px solid #949494;
   border-radius: 8px;
 }
-.tool div:first-child {
-  padding: 22px 35px;
+.tool .remove_tool {
+  float: right;
+  margin-right: 10px;
+  font-size: 24px;
+  color: black;
+  cursor: pointer;
 }
-.tool div:first-child .tool-name {
+.tool .remove_tool:hover {
+  filter: brightness(1.2);
+  color: grey;
+}
+.tool .tool_name_icon {
+  padding: 22px 35px 0px 35px;
+}
+.tool .tool_name_icon .tool-name {
   font-weight: 600;
   font-size: 20px;
 }
-.tool div:first-child img {
+.tool .tool_name_icon img {
   max-width: 75px;
   width: 75px;
   padding: 27px 5px;
 }
-.tool .type {
+.tool .type-container {
+  min-height: 80px;
+}
+.tool .type-container .type {
   border: 1px solid #949494;
+  width: 80%;
   border-radius: 20px;
   color: #949494;
-  padding: 6px;
+  padding: 6px 0px;
+  margin: 0 auto;
+  margin-bottom: 30px;
 }
-.tool .type p {
+.tool .type-container .type p {
   font-size: 16px;
 }
 .tool .stack-num {
@@ -268,6 +287,7 @@
 }
 .company-content .companies .company .company-description {
   color: #949494;
+  min-height: 90px;
   padding: 4px 6px;
 }
 .company-content .companies .company .company-description p {
@@ -283,8 +303,12 @@
   color: #949494;
   text-align: left;
 }
+.company-content .companies .company .popular-tools .popular-tools-tools {
+  margin: 10px 0;
+}
 .company-content .companies .company .popular-tools .popular-tools-tools img {
-  max-width: 69px;
+  max-width: 50px;
+  margin: 0 3px;
 }
 
 .company-profile {
@@ -305,7 +329,7 @@
 }
 .company-profile .company-details .company-details-details img {
   max-width: 140px;
-  margin-right: 10px;
+  margin-right: 20px;
 }
 .company-profile .company-details .company-details-details .company-name {
   font-size: 24px;
@@ -529,6 +553,7 @@
 }
 .matched-companies-content .companies .company .company-description {
   color: #949494;
+  min-height: 90px;
   padding: 4px 6px;
 }
 .matched-companies-content .companies .company .company-description p {
@@ -544,8 +569,12 @@
   color: #949494;
   text-align: left;
 }
+.matched-companies-content .companies .company .popular-tools .popular-tools-tools {
+  margin: 10px 0;
+}
 .matched-companies-content .companies .company .popular-tools .popular-tools-tools img {
-  max-width: 69px;
+  max-width: 50px;
+  margin: 0 3px;
 }
 .matched-companies-content .sign-ask {
   width: fit-content;

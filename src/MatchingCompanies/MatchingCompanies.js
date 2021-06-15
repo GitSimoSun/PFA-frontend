@@ -1,17 +1,37 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Route, Switch, useHistory } from 'react-router';
 import NavBar from '../Main/Navs/NavBar';
 import MCItem from './MCItem';
-import PythonIcon from '../Icons/python.png'
 import SelectedTools from './SelectedTools';
 import MatchedCompanies from './MatchedCompanies';
 import {ReactComponent as NextIcon} from '../Icons/Next.svg'
+import { MainContext } from '../Main/Context/MainContext';
 
 
 export default function MatchingCompanies() {
     let history = useHistory();
-    const [searchValue, setSearchValue] = useState('')
-    const handleChange = (e) => setSearchValue(e.target.value);
+    const {userTools} = useContext(MainContext)
+    const [searchValue, setSearchValue] = useState('');
+    const [tools, setTools] = useState([]);
+    
+    useEffect( () => {
+        fetch(`/api/tools&namecontain=simosun`)
+        .then(res => res.json())
+        .then(res => setTools(res.map(t => t.fields)))
+        .catch(console.log());
+    }, [])
+
+    const handleChange = (e) => {
+        setSearchValue(e.target.value);
+        fetch(`/api/tools&namecontain=${e.target.value}`)
+        .then(res => res.json())
+        .then(res => setTools(res.map(t => t.fields)))
+        .catch(console.log());
+    }
+    const handleClick = (e) => {
+        if(!!userTools.length) history.push("/matching-companies/selected-tools");
+        else alert("Select at least one tool first!!")
+    }
     return (
         <div className="container">
             <div className="navs">
@@ -24,9 +44,9 @@ export default function MatchingCompanies() {
                             <p className="title">Select the tools you are using</p>
                             <div className="input-div"><input type="text" placeholder="Search" value={searchValue} onChange={handleChange} /></div>              
                             <div className="select-tools-items">
-                                {Array(12).fill(0).map(item => <MCItem img={PythonIcon} name="Python" />)}
+                                {tools.map(t => <MCItem data={t} />)}
                             </div>
-                            <div className="next-icon" onClick={() => history.push("/matching-companies/selected-tools")}><NextIcon /></div>
+                            <div className="next-icon" onClick={handleClick}><NextIcon /></div>
                         </div>
                     </Route>
                     <Route path="/matching-companies/selected-tools" component={SelectedTools} />
