@@ -57,6 +57,11 @@ $grey-color: #949494;
                 margin-left: 20px;
                 background-color: #F37A1F;
             }
+            #sign-out{
+                padding: 6px 6px !important;
+                margin-right: 20px;
+                background-color: #F37A1F;
+            }
         }
     }
     .main-toolsbar {
@@ -217,20 +222,20 @@ $grey-color: #949494;
         }
     }
 }
+.back{
+    display: flex;
+    width: fit-content;
+    align-items: center;
+    cursor: pointer;
+    p{
+        margin-left: 8px;
+        font-size: 22px;
+    }
+}
 .all-items {
     width: 90vw;
     margin: 0 auto;
     padding-top: 20px;
-    .back{
-        display: flex;
-        width: fit-content;
-        align-items: center;
-        cursor: pointer;
-        p{
-            margin-left: 8px;
-            font-size: 22px;
-        }
-    }
     .all-items-items {
         margin-top: 30px;
         padding: 20px;
@@ -319,6 +324,7 @@ $grey-color: #949494;
         border-bottom: 1px solid $grey-color;
         padding-bottom: 10px;
         margin-bottom: 50px;
+        margin-top: 20px;
         .company-details-details {
             display: flex;
             align-items: center;
@@ -462,6 +468,10 @@ $grey-color: #949494;
                     font-weight: 600;
                     color: #333;
                     margin-bottom: 10px;
+                    text-align: center;
+                }
+                .mc-item-name {
+                    height: 50px;
                 }
                 &:hover {
                     background: #fff;
@@ -605,10 +615,10 @@ $grey-color: #949494;
         margin: 0 auto;
         background-color: #393939;
         position: fixed;
-        top: 20vh;
+        top: 16vh;
         left: 36vw;
         width: 27vw;
-        height: 72vh;
+        min-height: 75vh;
         z-index: 2;
         padding: 10px 50px;
         color: #fff;
@@ -623,42 +633,55 @@ $grey-color: #949494;
             }
         }
         .popup-title {
-            margin-top: 10vh;
+            margin-top: 6vh;
             margin-bottom: 3vh;
             font-size: 28px;
         }
         .popup-details {
             font-size: 13px;
-            margin-bottom: 7vh;
+            margin-bottom: 5vh;
         }
         .inputs {
             display: flex;
             flex-direction: column;
-            input {
-                outline: none;
-                border-radius: 6px;
-                padding: 10px;
-                border: none;
+            .text-input {
                 margin-bottom: 4vh;
                 font-size: 17px;
             }
-            margin-bottom: 8vh;
+            .input-input {
+                // border-radius: 6px;
+                background-color: white;
+                padding: 5px 10px;
+            }
         }
         .signup-btn {
             width: 69%;
             height: 40px;
             margin: 0 auto;
             background-color: #F37A1F;
-            font-size: 17px;
+            border-radius: 0;
+            font-size: 18px;
             font-weight: 300;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             transition: filter 300ms;
+            border: none;
+            outline: none;
             &:hover {
                 filter: brightness(1.2);
                 font-weight: 400;
+            }
+        }
+        .signin-btn {
+            background-color: #81B441 !important;
+        }
+        .signin-error {
+            margin-top: 2vh;
+            p {
+                color: rgb(218, 58, 58);
+                font-size: 16px;
             }
         }
     }

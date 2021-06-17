@@ -10,6 +10,7 @@ function useOutsideAlerter(ref, setShow) {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
+        console.log(ref.current, "pdpsk", event.target)
         disableScroll.off();
         setShow(false);
       }
@@ -25,31 +26,29 @@ function useOutsideAlerter(ref, setShow) {
  * Component that alerts if you click outside of it
  */
 
-export default function SignUpPopup(props) {
-  const { setShowSignUpPopup, setIsLoggedin } = useContext(MainContext);
+export default function SignInPopup(props) {
+  const { setShowSignInPopup, setIsLoggedin} = useContext(MainContext);
   const wrapperRef = useRef(null);
-  useOutsideAlerter(wrapperRef, setShowSignUpPopup);
+  useOutsideAlerter(wrapperRef, setShowSignInPopup);
   const [showClose, setShowClose] = useState(false);
-  const handleClick = () => setShowSignUpPopup(false);
+  const handleClick = () => setShowSignInPopup(false);
   const handleMouseOver = () => setShowClose(true);
   const handleMouseLeave = () => setShowClose(false);
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [password1, setPassword1] = useState("");
-  const [password2, setPassword2] = useState("");
+  const [password, setPassword] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
     setUsername("");
     setEmail("");
-    setPassword1("");
-    setPassword2("");
+    setPassword("");
     setErrors({});
   }, []);
   const onSubmit = (e) => {
     e.preventDefault();
-    const user = { username, email, password1, password2 };
-    fetch("/api/v1/users/auth/register/", {
+    const user = { username, email, password };
+    fetch("/api/v1/users/auth/login/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +60,7 @@ export default function SignUpPopup(props) {
         if (data.key) {
           localStorage.clear();
           localStorage.setItem("token", data.key);
-          setShowSignUpPopup(false);
+          setShowSignInPopup(false);
           setIsLoggedin(true);
         } else {
           localStorage.clear();
@@ -82,30 +81,28 @@ export default function SignUpPopup(props) {
             x
           </div>
         )}
-        <p className="popup-title">Sign up</p>
+        <p className="popup-title">Sign in</p>
         <p className="popup-details">
-          Provide a username, email adress and a password to save your data
+          Provide your username, email adress and password to log in
         </p>
         <form className="inputs" onSubmit={onSubmit}>
           <TextField
             className="text-input"
             InputProps={{
               className: "input-input",
-              disableUnderline: !!!errors.username,
+              disableUnderline: true,
             }}
             name="username"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
             required
-            error={!!errors.username}
-            helperText={!!errors.username? "Invalid username" : null}
           />
           <TextField
             className="text-input"
             InputProps={{
               className: "input-input",
-              disableUnderline: !!!errors.email,
+              disableUnderline: true,
             }}
             type="email"
             name="email"
@@ -113,40 +110,22 @@ export default function SignUpPopup(props) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             required
-            error={!!errors.email}
-            helperText={errors.email}
           />
           <TextField
             className="text-input"
             InputProps={{
               className: "input-input",
-              disableUnderline: !!!errors.password1,
+              disableUnderline: true,
             }}
             type="password"
             name="password"
             placeholder="Password"
-            value={password1}
-            onChange={(e) => setPassword1(e.target.value)}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
             required
-            error={!!errors.password1}
-            helperText={errors.password1}
           />
-          <TextField
-            className="text-input"
-            InputProps={{
-              className: "input-input",
-              disableUnderline: !!!errors.non_field_errors,
-            }}
-            type="password"
-            name="pwconfirm"
-            placeholder="Confirm Password"
-            value={password2}
-            onChange={(e) => setPassword2(e.target.value)}
-            required
-            error={!!errors.non_field_errors}
-            helperText={errors.non_field_errors}
-          />
-          <input type="submit" className="signup-btn" value="Sign up" />
+          <input type="submit" className="signup-btn signin-btn" value="Sign in" />
+          <div className="signin-error"><p>{errors.non_field_errors}</p></div>
         </form>
       </div>
     </div>

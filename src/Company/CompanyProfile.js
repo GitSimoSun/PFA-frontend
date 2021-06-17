@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import CategoryDropDown from './CategoryDropDown';
-import {ReactComponent as AppDataIcon} from '../Icons/AppData.svg'
-import {ReactComponent as BusinessToolsIcon} from '../Icons/BusinessTools.svg'
-import {ReactComponent as DevOpsIcon} from '../Icons/DevOps.svg'
-import {ReactComponent as UtilitiesIcon} from '../Icons/Utilities.svg'
-import { useParams } from 'react-router-dom';
+import {ReactComponent as AppDataIcon} from '../Icons/AppData.svg';
+import {ReactComponent as BusinessToolsIcon} from '../Icons/BusinessTools.svg';
+import {ReactComponent as DevOpsIcon} from '../Icons/DevOps.svg';
+import {ReactComponent as UtilitiesIcon} from '../Icons/Utilities.svg';
+import {ReactComponent as Chevron} from '../Icons/leftChevron.svg';
+import { useHistory, useParams } from 'react-router-dom';
 
 export default function CompanyProfile() {
+    let history = useHistory();
     let params = useParams();
     const [data, setData] = useState({});
     const [tools, setTools] = useState({});
@@ -27,6 +29,7 @@ export default function CompanyProfile() {
 	return (
         <>
             {!!Object.entries(tools).length && (<div className="company-profile">
+                <div className="back" onClick={history.goBack}> <Chevron /><p>Companies</p></div>
                 <div className="company-details">
                     <div className="company-details-details">                            
                         <img src={data.logo} alt="company icon"/>

@@ -22,7 +22,7 @@ export default function MCItem({data}) {
 	return (
         <div className="mc-item" onClick={handleClick}>
             <img src={data.logo} alt="item logo" />
-            <p>{data.name}</p>
+            <div className="mc-item-name"><p>{data.name}</p></div>
             <div className="item-use"><p>{!selected? "+ I use this" : "- I don't use this"}</p></div>
         </div>
 	)

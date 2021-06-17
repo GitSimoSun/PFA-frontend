@@ -11,11 +11,12 @@ import { MainContext } from '../Main/Context/MainContext';
 
 export default function MatchedCompanies() {
     let history = useHistory();
-    const {show, setShow, userTools} = useContext(MainContext)
+    const {showSignUpPopup, setShowSignUpPopup, userTools, isLoggedIn} = useContext(MainContext)
     const [companies, setCompanies] = useState([])
     const [index, setIndex] = useState(1);
     const [showMore, setShowMore] = useState(true)
     useEffect(() => {
+        if (!!!userTools.length) history.push("/matching-companies/");
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -26,13 +27,13 @@ export default function MatchedCompanies() {
             .then(res => {setCompanies(res.map(t => t.fields))
                          if (res.length < 18) setShowMore(false);   
             });
-    }, [userTools])
+    }, [userTools, history])
     useEffect(() => {
-        if (!show) {
+        if (!showSignUpPopup) {
             disableScroll.off()
         }
-    }, [show])
-    const handleClick = () => {setShow(true); disableScroll.on();}
+    }, [showSignUpPopup])
+    const handleClick = () => {setShowSignUpPopup(true); disableScroll.on();}
     const handleShowMoreClick = () => {
         const requestOptions = {
             method: 'POST',
@@ -65,8 +66,8 @@ export default function MatchedCompanies() {
                     {companies.map(c => <Company data={c} />)}    
                 </div>
                 {showMore && <div className="show-more" onClick={handleShowMoreClick}><p>Show More</p></div>}
-                <div className="sign-ask" onClick={handleClick}><p>Do you want to save your data?</p></div>
-                {show && <SignUpPopup /> }
+                {isLoggedIn && <div className="sign-ask" onClick={handleClick}><p>Do you want to save your data?</p></div>}
+                {showSignUpPopup && <SignUpPopup /> }
             </div>
         </div>
     )

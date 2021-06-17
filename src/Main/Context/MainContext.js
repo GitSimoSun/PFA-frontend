@@ -5,15 +5,21 @@ export const MainContext = createContext();
 
 
 export const MainProvider = (props) => {
-    const [show, setShow] = useState(false);
+    const [showSignUpPopup, setShowSignUpPopup] = useState(false);
+    const [showSignInPopup, setShowSignInPopup] = useState(false);
+    const [isLoggedin, setIsLoggedin] = useState(false);
     const [userTools, setUserTools] = useState([]);
       return (
         <MainContext.Provider
           value={{
-            show,
-            setShow,
+            showSignUpPopup,
+            setShowSignUpPopup,
             userTools,
             setUserTools,
+            showSignInPopup,
+            setShowSignInPopup,
+            isLoggedin,
+            setIsLoggedin,
           }}
         >
           {props.children}

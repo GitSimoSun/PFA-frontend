@@ -20,23 +20,12 @@
   padding: 15px 0px;
   font-size: 21px;
 }
-.home-container .home-navbar .home-navbar-nav {
-  margin-right: 10px;
-  min-width: 15%;
-  display: flex;
-  justify-content: space-evenly;
-}
-.home-container .home-navbar .home-navbar-nav li {
-  margin-left: 5px;
-}
-.home-container .home-navbar .home-navbar-nav li a {
-  color: #fff;
-}
+
 .home-container .home-content {
   width: 90vw;
   text-align: center;
   margin: 0 auto;
-  margin-top: 100px;
+  margin-top: 130px;
 }
 .home-container .home-content .home-big-title {
   text-align: center;
