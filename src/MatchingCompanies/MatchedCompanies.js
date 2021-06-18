@@ -66,7 +66,7 @@ export default function MatchedCompanies() {
                     {companies.map(c => <Company data={c} />)}    
                 </div>
                 {showMore && <div className="show-more" onClick={handleShowMoreClick}><p>Show More</p></div>}
-                {isLoggedin && <div className="sign-ask" onClick={handleClick}><p>Do you want to save your data?</p></div>}
+                {!isLoggedin && <div className="sign-ask" onClick={handleClick}><p>Do you want to save your data?</p></div>}
                 {showSignUpPopup && <SignUpPopup /> }
             </div>
         </div>
