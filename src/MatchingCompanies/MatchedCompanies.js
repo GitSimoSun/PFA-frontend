@@ -11,7 +11,7 @@ import { MainContext } from '../Main/Context/MainContext';
 
 export default function MatchedCompanies() {
     let history = useHistory();
-    const {showSignUpPopup, setShowSignUpPopup, userTools, isLoggedIn} = useContext(MainContext)
+    const {showSignUpPopup, setShowSignUpPopup, userTools, isLoggedin} = useContext(MainContext)
     const [companies, setCompanies] = useState([])
     const [index, setIndex] = useState(1);
     const [showMore, setShowMore] = useState(true)
@@ -66,7 +66,7 @@ export default function MatchedCompanies() {
                     {companies.map(c => <Company data={c} />)}    
                 </div>
                 {showMore && <div className="show-more" onClick={handleShowMoreClick}><p>Show More</p></div>}
-                {isLoggedIn && <div className="sign-ask" onClick={handleClick}><p>Do you want to save your data?</p></div>}
+                {isLoggedin && <div className="sign-ask" onClick={handleClick}><p>Do you want to save your data?</p></div>}
                 {showSignUpPopup && <SignUpPopup /> }
             </div>
         </div>
