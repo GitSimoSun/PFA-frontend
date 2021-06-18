@@ -34,7 +34,7 @@ export default function NavBar() {
           .then(res => res.json())
           .then(data => {
             setIsLoggedin(false);
-            setUserTools(true);
+            setUserTools([]);
             localStorage.clear();
           });
       };

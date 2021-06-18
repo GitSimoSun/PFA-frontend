@@ -10,7 +10,6 @@ function useOutsideAlerter(ref, setShow) {
   useEffect(() => {
     function handleClickOutside(event) {
       if (ref.current && !ref.current.contains(event.target)) {
-        console.log(ref.current, "pdpsk", event.target)
         disableScroll.off();
         setShow(false);
       }
@@ -27,7 +26,7 @@ function useOutsideAlerter(ref, setShow) {
  */
 
 export default function SignInPopup(props) {
-  const { setShowSignInPopup, setIsLoggedin} = useContext(MainContext);
+  const { setShowSignInPopup, setIsLoggedin, userTools, /*setUserTools */} = useContext(MainContext);
   const wrapperRef = useRef(null);
   useOutsideAlerter(wrapperRef, setShowSignInPopup);
   const [showClose, setShowClose] = useState(false);
@@ -47,7 +46,7 @@ export default function SignInPopup(props) {
   }, []);
   const onSubmit = (e) => {
     e.preventDefault();
-    const user = { username, email, password };
+    const user = { username, email, password, userTools };
     fetch("/api/v1/users/auth/login/", {
       method: "POST",
       headers: {

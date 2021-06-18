@@ -15,11 +15,12 @@ export default function MatchingCompanies() {
     const [tools, setTools] = useState([]);
     
     useEffect( () => {
-        fetch(`/api/tools&namecontain=simosun`)
-        .then(res => res.json())
-        .then(res => setTools(res.map(t => t.fields)))
-        .catch(console.log());
-    }, [])
+        if (searchValue === "")
+            fetch(`/api/tools&namecontain=simosun`)
+            .then(res => res.json())
+            .then(res => setTools(res.map(t => t.fields)))
+            .catch(console.log());
+    }, [searchValue])
 
     const handleChange = (e) => {
         setSearchValue(e.target.value);
